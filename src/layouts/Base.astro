@@ -1,0 +1,80 @@
+---
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource-variable/source-serif-4';
+import '../styles/global.css';
+import { site } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description = site.description, type = 'website' } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name}: see how great features work`;
+const path = Astro.url.pathname;
+const canonical = new URL(path, site.url).href;
+const shareImage = new URL('/og.png', site.url).href;
+
+const nav = [
+  { href: '/#teardowns', label: 'Teardowns', current: path.startsWith('/teardowns') },
+  { href: '/full-pack', label: 'Full pack', current: path.startsWith('/full-pack') },
+  { href: '/responsible-use', label: 'Responsible use', current: path.startsWith('/responsible-use') },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title ?? site.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Feature Teardowns. See how great features work. Then build your own." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? site.name} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="theme-color" content="#f5f0e6" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <header class="wrap site-header">
+      <a class="wordmark label" href="/">{site.name}</a>
+      <nav class="site-nav label" aria-label="Main">
+        {nav.map((item) => (
+          <a href={item.href} aria-current={item.current ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="wrap">
+      <div class="site-footer label">
+        <span class="muted">{site.name}. Made with REA.</span>
+        <nav aria-label="Footer">
+          <a href="/full-pack">Full pack</a>
+          <a href="/responsible-use">Responsible use</a>
+          {site.xUrl && <a href={site.xUrl} target="_blank" rel="noopener">Follow on X</a>}
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

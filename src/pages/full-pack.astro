@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const onSale = Boolean(site.buyUrl && site.price);
+
+// Edit these to match what the pack contains.
+const included = [
+  {
+    title: 'Every teardown',
+    text: 'The full collection in one place.',
+  },
+  {
+    title: 'All the build prompts',
+    text: 'Each prompt as a ready-to-paste text file for your AI coding agent.',
+  },
+  {
+    title: 'The diagrams',
+    text: 'Every diagram as a clean image you can keep, print or share.',
+  },
+  {
+    title: 'Future additions',
+    text: 'New teardowns are added to the pack as they are finished.',
+  },
+];
+---
+
+<Base title="Full pack" description="Every Feature Teardown, every build prompt and every diagram in one download.">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="label label-accent">Full pack</p>
+      <h1>Every teardown. Every prompt.</h1>
+      <p class="standfirst">
+        One download with the whole collection, so you can stop reading about features and start building them.
+      </p>
+    </header>
+
+    <div class="pack">
+      <section aria-labelledby="included-title">
+        <h2 class="label" id="included-title" style="margin-bottom: 1rem;">What's included</h2>
+        <ol class="pack-list">
+          {included.map((item, i) => (
+            <li>
+              <span class="label label-accent">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <aside class="price-box" aria-label="Price">
+        {onSale ? (
+          <>
+            <p class="label muted">One-time price</p>
+            <p class="price">{site.price}</p>
+            <a class="button" href={site.buyUrl}>Buy the full pack</a>
+          </>
+        ) : (
+          <>
+            <p class="label muted">Status</p>
+            <p class="price price-soon">Coming soon</p>
+          </>
+        )}
+      </aside>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('teardowns');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, app, difficulty, readTime, summary } = entry.data;
+---
+
+<Base title={title} description={summary} type="article">
+  <article class="wrap">
+    <header class="page-head">
+      <p class="label"><a href="/#teardowns">Teardowns</a> <span class="muted">/ {app}</span></p>
+      <h1>{title}</h1>
+      <p class="standfirst">{summary}</p>
+      <dl class="meta-row label">
+        <div><dt>App</dt><dd>{app}</dd></div>
+        <div><dt>Difficulty</dt><dd>{difficulty}</dd></div>
+        <div><dt>Read time</dt><dd>{readTime} min</dd></div>
+      </dl>
+    </header>
+
+    <div class="prose numbered">
+      <Content />
+    </div>
+
+    <footer class="next-step label">
+      <a href="/#teardowns">&larr; All teardowns</a>
+      <a href="/full-pack">Get the full pack &rarr;</a>
+    </footer>
+  </article>
+</Base>
+
+<script>
+  // Wrap every code block in the teardown in a box with a Copy button.
+  document.querySelectorAll<HTMLPreElement>('.prose pre').forEach((pre) => {
+    const box = document.createElement('div');
+    box.className = 'prompt-box';
+
+    const bar = document.createElement('div');
+    bar.className = 'prompt-bar';
+
+    const label = document.createElement('span');
+    label.className = 'label';
+    label.textContent = 'Prompt';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'button copy-button';
+    button.textContent = 'Copy';
+
+    button.addEventListener('click', async () => {
+      const text = (pre.textContent ?? '').trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'Copied';
+      } catch {
+        // Clipboard blocked: select the text so Ctrl+C works.
+        const range = document.createRange();
+        range.selectNodeContents(pre);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        button.textContent = 'Press Ctrl+C';
+      }
+      setTimeout(() => (button.textContent = 'Copy'), 2000);
+    });
+
+    bar.append(label, button);
+    pre.replaceWith(box);
+    box.append(bar, pre);
+  });
+</script>

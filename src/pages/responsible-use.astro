@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+
+<Base
+  title="Responsible use"
+  description="How Feature Teardowns are made: open-source apps, public behaviour and lawful analysis. We never publish other companies' code."
+>
+  <article class="wrap">
+    <header class="page-head">
+      <p class="label label-accent">Responsible use</p>
+      <h1>We explain ideas. We don't hand out other people's code.</h1>
+      <p class="standfirst">
+        Feature Teardowns exists to teach how good software works. Here is where our explanations come from, and the
+        lines we don't cross.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>Where our explanations come from</h2>
+      <ul>
+        <li>
+          <strong>Open-source apps.</strong> Where a feature exists in an app whose code is published openly, we learn
+          from that.
+        </li>
+        <li>
+          <strong>Public behaviour.</strong> What anyone can see by using an app: what it shows, how it responds and
+          what it does over time.
+        </li>
+        <li>
+          <strong>Lawful analysis.</strong> We study software only in ways the law allows, using REA (Reverse Engineer
+          Anything) to understand how a feature is put together.
+        </li>
+      </ul>
+
+      <h2>What we never do</h2>
+      <ul>
+        <li>We never publish other companies' code.</li>
+        <li>We never share private keys, passwords, internal documents or anything else that isn't ours to share.</li>
+        <li>We don't explain how to break into accounts, get around payment, or get past an app's security.</li>
+      </ul>
+
+      <h2>What a teardown is</h2>
+      <p>
+        A teardown describes the idea behind a feature in plain English, with a diagram we drew ourselves. The
+        "Build your own" prompt asks an AI coding agent to write a fresh version from that description. Nothing in it
+        is copied from the original app.
+      </p>
+
+      <h2>What we ask of you</h2>
+      <p>
+        Use these teardowns to learn and to build your own things. Don't use them to clone someone's product, copy
+        their branding, or pass your version off as theirs.
+      </p>
+
+      {site.xUrl && (
+        <>
+          <h2>Spotted a problem?</h2>
+          <p>
+            If you think something on this site crosses one of these lines, tell us and we'll look at it.
+            <a href={site.xUrl} target="_blank" rel="noopener">Message us on X</a>.
+          </p>
+        </>
+      )}
+    </div>
+  </article>
+</Base>
