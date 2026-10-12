@@ -4,7 +4,7 @@ export const site = {
   name: 'Feature Teardowns',
   url: 'https://useteardowns.xyz',
   description:
-    'Plain-English breakdowns of how popular app features work, made with REA (Reverse Engineer Anything). Each one ends with a copy-paste prompt so you can build your own.',
+    'Plain-English breakdowns of how popular app features work, researched with AI coding agents and REA (Reverse Engineer Anything). Each one ends with a copy-paste prompt so you can build your own.',
 
   // Your X account, e.g. 'https://x.com/yourhandle'. Empty = no X links shown.
   xUrl: '',

@@ -1,6 +1,6 @@
 ﻿# Feature Teardowns
 
-Plain-English breakdowns of how popular app features work, made with REA (Reverse Engineer Anything). Each one ends with a copy-paste prompt so anyone can build their own version with an AI coding agent.
+Plain-English breakdowns of how popular app features work, researched with AI coding agents and REA (Reverse Engineer Anything). Each one ends with a copy-paste prompt so anyone can build their own version with an AI coding agent.
 
 Built with [Astro](https://astro.build). Ready to deploy on Vercel.
 
