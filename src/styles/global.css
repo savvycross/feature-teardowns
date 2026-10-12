@@ -494,6 +494,13 @@ em {
   stroke-width: 1.5;
 }
 
+.d-curve {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
 .d-arrowhead {
   fill: var(--ink);
 }
