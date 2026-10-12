@@ -501,6 +501,17 @@ em {
   stroke-linecap: round;
 }
 
+.d-rule {
+  stroke: var(--rule);
+  stroke-width: 1.5;
+}
+
+.d-ring {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
 .d-arrowhead {
   fill: var(--ink);
 }
